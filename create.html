@@ -226,6 +226,10 @@
         function validateNIF(nif) {
             return /^(\d{9})$/.test(nif);
         }
+        function validateAddress(address) {
+            return /^[\w\s.,'-]{3,}(\s*\d+[\w\s]*)?$/.test(address);
+        }
+        
 
         $("#submit-button").on("click", function () {
             let valid = true;
@@ -259,8 +263,6 @@
                 $("#confirm-password-error").text("As senhas não coincidem.");
             }
 
-
-            // Check if the email or phone already exists in localStorage
             if (localStorage.getItem(viewModel.email())) {
                 valid = false;
                 $("#email-error").text("Este email já está registrado.");
@@ -269,6 +271,11 @@
             if (localStorage.getItem(viewModel.phone())) {
                 valid = false;
                 $("#phone-error").text("Este número de telefone já está registrado.");
+            }
+
+            if (viewModel.address().trim() && !validateAddress(viewModel.address())) {
+                valid = false;
+                $("#address-error").text("Insira uma morada válida, com o formato correto (ex.: Rua Principal, Nº 123).");
             }
 
             if (!$('#invalidCheck').is(':checked')) {
