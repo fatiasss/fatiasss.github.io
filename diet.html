@@ -174,89 +174,94 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Retrieve the current user's email or identifier from localStorage
-            const currentUser = JSON.parse(localStorage.getItem("currentuser"));
-            if (!currentUser || !currentUser.email) {
-                alert("No current user found. Please log in.");
-                window.location.href = "login.html"; // Redirect to login if no user is found
-                return;
-            }
+<script>
+    $(document).ready(function () {
+        // Retrieve the current user's email or identifier from localStorage
+        const currentUser = JSON.parse(localStorage.getItem("currentuser"));
+        if (!currentUser || !currentUser.email) {
+            alert("No current user found. Please log in.");
+            window.location.href = "login.html"; // Redirect to login if no user is found
+            return;
+        }
 
-            const email = currentUser.email;
+        const email = currentUser.email;
 
-            // Retrieve the user data from localStorage using the current user's email
-            let userData = JSON.parse(localStorage.getItem(email));
-            if (!userData || !userData.dogs) {
-                alert("User data or dogs data not found. Please log in.");
-                window.location.href = "login.html"; // Redirect to login if no data is found
-                return;
-            }
+        // Retrieve the user data from localStorage using the current user's email
+        let userData = JSON.parse(localStorage.getItem(email));
+        if (!userData || !userData.dogs) {
+            alert("User data or dogs data not found. Please log in.");
+            window.location.href = "login.html"; // Redirect to login if no data is found
+            return;
+        }
 
-            // Get the dog ID from the URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const dogId = urlParams.get('dogId');
+        // Get the dog ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const dogId = urlParams.get('dogId');
 
-            // Find the dog object from the user's dogs array
-            let dogData = userData.dogs.find(dog => dog.id === parseInt(dogId, 10));
-            if (!dogData) {
-                alert("Dog data not found. Please go back and try again.");
-                window.location.href = "home.html"; // Redirect to home if the dog isn't found
-                return;
-            }
+        // Find the dog object from the user's dogs array
+        let dogData = userData.dogs.find(dog => dog.id === parseInt(dogId, 10));
+        if (!dogData) {
+            alert("Dog data not found. Please go back and try again.");
+            window.location.href = "home.html"; // Redirect to home if the dog isn't found
+            return;
+        }
 
-            // Populate the page with dog data
-            $("#dogname").text(dogData.name);
+        // Populate the page with dog data
+        $("#dogname").text(dogData.name);
 
-            // Toggle tag selection
-            $('.tag').on('click', function () {
-                $(this).toggleClass('tag-selected');
-                $(this).toggleClass('tag-default');
-            });
+        // Toggle tag selection
+        $('.tag').on('click', function () {
+            $(this).toggleClass('tag-selected');
+            $(this).toggleClass('tag-default');
+        });
 
-            // Search input functionality for tags
-            $('#search-input').on('input', function () {
-                const searchTerm = $(this).val().toLowerCase();
-                $('.tag').each(function () {
-                    const tagText = $(this).text().toLowerCase();
-                    $(this).toggle(tagText.includes(searchTerm));
-                });
-            });
-
-            // Handle form submission
-            $('#submitButton').on('click', function (event) {
-                event.preventDefault();  // Prevent the form from submitting
-
-                const selectedIllnesses = [];
-                // Collect selected (toggled) tags
-                $('.tag-selected').each(function () {
-                    selectedIllnesses.push($(this).text());
-                });
-
-                // Add the selected illnesses to the dog object
-                dogData.diet = selectedIllnesses;
-
-                // Update the user's dog data in the userData object
-                const dogIndex = userData.dogs.findIndex(dog => dog.id === parseInt(dogId, 10));
-                userData.dogs[dogIndex] = dogData;
-
-                // Save the updated user data back to localStorage
-                localStorage.setItem(email, JSON.stringify(userData));
-
-                // Get the next dog's ID by incrementing the current dog ID by 1
-                const nextDogId = (parseInt(dogId, 10) + 1).toString();
-
-                // Check if the next dog's data exists in the user's dogs array
-                const nextDog = userData.dogs.find(dog => dog.id === parseInt(nextDogId, 10));
-                if (nextDog) {
-                    window.location.href = `dogname.html?dogId=${nextDogId}`;
-                } else {
-                    window.location.href = `home.html`;
-                }
+        // Search input functionality for tags
+        $('#search-input').on('input', function () {
+            const searchTerm = $(this).val().toLowerCase();
+            $('.tag').each(function () {
+                const tagText = $(this).text().toLowerCase();
+                $(this).toggle(tagText.includes(searchTerm));
             });
         });
-    </script>
+
+        // Handle form submission
+        $('#submitButton').on('click', function (event) {
+            event.preventDefault();  // Prevent the form from submitting
+
+            const selectedIllnesses = [];
+            // Collect selected (toggled) tags
+            $('.tag-selected').each(function () {
+                selectedIllnesses.push($(this).text());
+            });
+
+            // Add the selected illnesses to the dog object
+            dogData.diet = selectedIllnesses;
+
+            // Update the user's dog data in the userData object
+            const dogIndex = userData.dogs.findIndex(dog => dog.id === parseInt(dogId, 10));
+            userData.dogs[dogIndex] = dogData;
+
+            // Set firstTime to false
+            userData.firstTime = false;
+
+            // Save the updated user data back to localStorage
+            localStorage.setItem(email, JSON.stringify(userData));
+
+            // Get the next dog's ID by incrementing the current dog ID by 1
+            const nextDogId = (parseInt(dogId, 10) + 1).toString();
+
+            // Check if the next dog's data exists in the user's dogs array
+            const nextDog = userData.dogs.find(dog => dog.id === parseInt(nextDogId, 10));
+            if (nextDog) {
+                window.location.href = `dogname.html?dogId=${nextDogId}`;
+            } else {
+                userData.firstTime = false;
+                window.location.href = `home.html`; // Redirect to home
+            }
+        });
+    });
+</script>
+
 
 
 
