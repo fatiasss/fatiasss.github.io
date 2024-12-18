@@ -92,9 +92,9 @@
             border: none;
         }
 
-            button.btn:hover {
-                background-color: #f7f7f7;
-            }
+        button.btn:hover {
+            background-color: #f7f7f7;
+        }
 
         .form-control {
             background-color: white;
@@ -108,102 +108,140 @@
         input::placeholder {
             color: #999;
         }
-        #mt-5 {align-content: center
-
-
+        #mt-5 {
+            align-content: center
         }
     </style>
-    
 </head>
 <body>
     <div class="row mt-5">
         <img class="logo" src="images/images-removebg-preview.png">
-        <div class="content container">
+        <div class="content container" data-bind="with: dog">
             <div class="section">
                 <div class="section-title">Name</div>
-                <div class="section-value" contenteditable="true" id="name">Paty</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <div class="section-value" contenteditable="true" data-bind="text: name"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Gender</div>
+                <div class="section-value" contenteditable="true" data-bind="text: gender"></div>
             </div>
 
             <div class="section">
                 <div class="section-title">Has been Spayed?</div>
-                <div class="section-value" contenteditable="true" id="spayed">Yes</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <div class="section-value" contenteditable="true" data-bind="text: spayed"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Age</div>
+                <div class="section-value" contenteditable="true" data-bind="text: ageValue"></div>
+                <span data-bind="text: ageUnit"></span>
             </div>
 
             <div class="section">
                 <div class="section-title">Breed</div>
-                <div class="section-value" contenteditable="true" id="breed">Corgi</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <div class="section-value" contenteditable="true" data-bind="text: breed"></div>
             </div>
 
             <div class="section">
                 <div class="section-title">Weight</div>
-                <div class="section-value" contenteditable="true" id="weight">12 kgs</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <div class="section-value" contenteditable="true" data-bind="text: weight"></div>
             </div>
 
-            <div class="section attribute-section">
-                <div class="section-title">Attributes</div>
-                <div class="section-value" contenteditable="true">Active</div>
-                <div class="section-value" contenteditable="true">Picky Eater</div>
-                <div class="section-value" contenteditable="true">Round Body</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+            <div class="section">
+                <div class="section-title">Activity Level</div>
+                <div class="section-value" contenteditable="true" data-bind="text: activitylevel"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Pickiness</div>
+                <div class="section-value" contenteditable="true" data-bind="text: pickiness"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Preferred Food Type</div>
+                <div class="section-value" contenteditable="true" data-bind="text: foodtype"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Health Issues</div>
+                <div class="section-value" contenteditable="true" data-bind="text: healthissues"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Diet</div>
+                <ul data-bind="foreach: diet">
+                    <li contenteditable="true" data-bind="text: $data"></li>
+                </ul>
             </div>
 
             <div class="section">
                 <div class="section-title">Illnesses</div>
-                <div class="section-value" contenteditable="true">Bad Breath</div>
-                <div class="section-value" contenteditable="true">Constipation</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
-            </div>
-            <div class="section">
-                <div class="section-title">Prescription Diet</div>
-                <div class="section-value" contenteditable="true">None</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <ul data-bind="foreach: illnesses">
+                    <li contenteditable="true" data-bind="text: $data"></li>
+                </ul>
             </div>
 
-            <div class="section">
-                <div class="section-title">Is Vaccinated</div>
-                <div class="section-value" contenteditable="true">Yes</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
-            </div>
-
-            <div class="section">
-                <div class="section-title">Previous Treatments</div>
-                <div class="section-value" contenteditable="true">None</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
-            </div>
-
-            <button id="loadButton"><a href="home.html">Back</a></button>
+            <button class="btn" onclick="ko.dataFor(this).saveChanges()">Save Changes</button>
+            <button id="loadButton"><a href="home.html" style="color: white; text-decoration: none;">Back</a></button>
         </div>
     </div>
 
-
-
-    <!-- Then include the other scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <script>
-        function logAllDogInfo() {
-            // Percorre todas as chaves do localStorage
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i); // Obtém a chave atual
 
-                // Verifica se a chave começa com 'dog-'
-                if (key.startsWith('dog-')) {
-                    const dogData = localStorage.getItem(key); // Obtém o valor associado à chave
-                    
+    <script>
+        var userEmail = localStorage.getItem("currentuser");
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        var id = getQueryParam("id");
+
+        var vm = function () {
+            var self = this;
+            self.dog = ko.observable();
+
+            // Retrieve user data from localStorage
+            var userData = JSON.parse(localStorage.getItem(userEmail));
+
+            // Check if userData and dogs array exist, then populate the observable
+            if (userData && userData.dogs) {
+                var dogs = userData.dogs;
+                for (var i = 0; i < dogs.length; i++) {
+                    if (dogs[i].id == id) {
+                        self.dog(ko.mapping.fromJS(dogs[i]));
+                        break;
+                    }
                 }
             }
-        }
-        // Executa a função para exibir as informações no console
-        logAllDogInfo();
 
-        
+            // Function to save changes to the localStorage
+            self.saveChanges = function () {
+                if (userData && userData.dogs) {
+                    var updatedDog = ko.toJS(self.dog);
+                    for (var i = 0; i < userData.dogs.length; i++) {
+                        if (userData.dogs[i].id == id) {
+                            userData.dogs[i] = updatedDog;
+                            break;
+                        }
+                    }
 
+                    // Update localStorage
+                    localStorage.setItem(userEmail, JSON.stringify(userData));
+
+                    // Notify the user
+                    alert("The dog information has been updated successfully.");
+                }
+            };
+        };
+
+        // Apply bindings
+        ko.applyBindings(new vm());
     </script>
 </body>
 </html>

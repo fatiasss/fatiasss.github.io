@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Section Values</title>
+    <title>Perfil do Cliente</title>
     <style>
         .content {
             font-family: Arial, sans-serif;
@@ -16,34 +16,34 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            color: black
+            color: black;
         }
 
         .section-title {
             font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
         }
 
-        .section-value {
-            color: white;
-        }
-
-        .arrow {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #ccc;
-        }
-
-        .attribute-section .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-right: 5px;
-            background-color: #f0f0f0;
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 0.9em;
+            background-color: #fdf4f0;
+            color: #333;
+            font-size: 14px;
+            box-sizing: border-box;
         }
 
-        #loadButton {
+        .form-control:focus {
+            outline: none;
+            border-color: #e4572e;
+            box-shadow: 0 0 5px #e4572e;
+        }
+
+        #saveButton {
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
@@ -54,9 +54,8 @@
             cursor: pointer;
         }
 
-        .error-message {
-            color: #C62828;
-            font-size: 0.9em;
+        #saveButton:hover {
+            background-color: #0056b3;
         }
 
         .logo {
@@ -78,110 +77,98 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            color: black;
         }
 
         h2 {
             color: white;
         }
-
-        button.btn {
-            color: #E4572E;
-            background-color: white;
-            border-radius: 15px;
-            border: none;
-        }
-
-            button.btn:hover {
-                background-color: #f7f7f7;
-            }
-
-        .form-control {
-            background-color: white;
-            color: black;
-        }
-
-        .form-check-label {
-            color: white;
-        }
-
-        input::placeholder {
-            color: #999;
-        }
-
-        #mt-5 {
-            align-content: center
-        }
     </style>
-
 </head>
 <body>
     <div class="row mt-5">
-
         <img class="logo" src="images/images-removebg-preview.png">
         <div class="content container">
-            <div class="section">
-                <div class="section-title">Name</div>
-                <div class="section-value" contenteditable="true" id="name">Igor</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
-            </div>
+            <h2>Perfil do Cliente</h2>
 
             <div class="section">
-                <div class="section-title">Email</div>
-                <div class="section-value" contenteditable="true" id="spayed">igor@email.com</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <label class="section-title" for="name">Name</label>
+                <input class="form-control" id="name" type="text">
             </div>
 
             <div class="section">
-                <div class="section-title">Telefone</div>
-                <div class="section-value" contenteditable="true" id="breed">966 666 666</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <label class="section-title" for="email">Email</label>
+                <input class="form-control" id="email" type="email" readonly>
             </div>
 
             <div class="section">
-                <div class="section-title">NIF</div>
-                <div class="section-value" contenteditable="true" id="weight">255555555</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
-            </div>
-
-            <div class="section attribute-section">
-                <div class="section-title">Morada</div>
-                <div class="section-value" contenteditable="true">Rua X, nºx,Aveiro</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <label class="section-title" for="phone">Telefone</label>
+                <input class="form-control" id="phone" type="text">
             </div>
 
             <div class="section">
-                <div class="section-title">Senha</div>
-                <div class="section-value" contenteditable="true">*******</div>
-                <div class="arrow" style="top: 25px; left: 275px;"></div>
+                <label class="section-title" for="nif">NIF</label>
+                <input class="form-control" id="nif" type="text">
             </div>
 
-            <button id="loadButton"><a href="home.html"</a>Back</button>
+            <div class="section">
+                <label class="section-title" for="address">Morada</label>
+                <input class="form-control" id="address" type="text">
+            </div>
+
+            <div class="section">
+                <label class="section-title" for="password">Senha</label>
+                <input class="form-control" id="password" type="password">
+            </div>
+
+            <button id="saveButton">Salvar Alterações</button>
         </div>
     </div>
 
-
-
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
+        // Função para carregar os dados do usuário
+        function loadUserData() {
+            const email = localStorage.getItem("currentuser");
+            const userData = JSON.parse(localStorage.getItem(email));
 
-            document.getElementById("loadButton").onclick = function () {
-                var name = document.getElementById("name").innerText;
-                var spayed = document.getElementById("spayed").innerText;
-                var breed = document.getElementById("breed").innerText;
-                var weight = document.getElementById("weight").innerText;
-                var attributes = [];
-                document.querySelectorAll('.badge').forEach(function (badge) {
-                    attributes.push(badge.innerText);
-                });
-
-                console.log("Updated Information:");
-                console.log("Name: " + name);
-                console.log("Spayed: " + spayed);
-                console.log("Breed: " + breed);
-                console.log("Weight: " + weight);
-                console.log("Attributes: " + attributes.join(", "));
+            if (userData) {
+                document.getElementById("name").value = userData.name || '';
+                document.getElementById("email").value = userData.email || '';
+                document.getElementById("phone").value = userData.phone || '';
+                document.getElementById("nif").value = userData.nif || '';
+                document.getElementById("address").value = userData.address || '';
+                document.getElementById("password").value = userData.password || '';
+            } else {
+                alert("Usuário não encontrado.");
             }
-    </script>
+        }
 
+        // Função para salvar os dados do usuário
+        function saveUserData() {
+            const email = localStorage.getItem("currentuser");
+            const userData = JSON.parse(localStorage.getItem(email));
+
+            if (userData) {
+                userData.name = document.getElementById("name").value;
+                userData.phone = document.getElementById("phone").value;
+                userData.nif = document.getElementById("nif").value;
+                userData.address = document.getElementById("address").value;
+                userData.password = document.getElementById("password").value;
+
+                // Salvar os novos dados no localStorage
+                localStorage.setItem(email, JSON.stringify(userData));
+                alert("Dados atualizados com sucesso!");
+            } else {
+                alert("Erro ao salvar os dados.");
+            }
+        }
+
+        // Eventos
+        document.getElementById("saveButton").addEventListener("click", saveUserData);
+
+        // Carregar os dados ao iniciar
+        loadUserData();
+    </script>
 </body>
 </html>

@@ -94,18 +94,12 @@
             <h1 class="app-title">PawPal</h1>
         </div>
         <div class="label-card">
-            <div class="row">
+            <div class="row" data-bind="foreach: dogs">
                 <div class="dog-profile">
-                    <a href="perfil_cão.html?">
+                    <a data-bind="attr: {href: 'perfil_cão.html?dog=' + id}">
                         <img src="images/dog.png" alt="Dog Image" />
                     </a>
-                    <h2>Paty</h2>
-                </div>
-                <div class="dog-profile">
-                    <a href="perfil_cão.html">
-                        <img src="images/dog.png" alt="Dog Image" />
-                    </a>
-                    <h2>Sylvester</h2>
+                    <h2 data-bind="text: name"></h2>
                 </div>
             </div>
 
@@ -127,9 +121,29 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap JS -->
+        <!-- Then include the other scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+        var userEmail = localStorage.getItem("currentuser");
+        
+        var vm = function () {
+            this.dogs = ko.observableArray();
+
+            // Retrieve user data from localStorage
+            var userData = JSON.parse(localStorage.getItem(userEmail));
+            
+            // Check if userData and dogs array exist, then populate the observableArray
+            if (userData && userData.dogs) {
+                this.dogs(userData.dogs);
+            }
+        };
+
+        // Apply bindings
+        ko.applyBindings(new vm());
+    </script>
 </body>
 </html>
 
