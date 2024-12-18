@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawPal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #173B33;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .main-container {
+            width: 320px;
+            background: white;
+            border-radius: 10px;
+            position: relative;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #173B33;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .app-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+        }
+
+        .label-card {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .dog-profile {
+            width: 120px;
+            height: 120px;
+            background: #F2674B;
+            margin: 10px auto;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            .dog-profile img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .dog-profile h2 {
+                margin-top: 10px;
+                font-size: 16px;
+                font-weight: 700;
+                color: white;
+            }
+
+        .next-button {
+            background: #F2674B;
+            border-radius: 14px;
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            border: 1px solid white;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+            .next-button:hover {
+                background: #d95b3b;
+            }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <img src="images/images-removebg-preview.png" alt="Icon" class="float-end" style="width:37px; height:35px" />
+            <h1 class="app-title">PawPal</h1>
+        </div>
+        <div class="label-card">
+            <div class="row">
+                <div class="dog-profile">
+                    <a href="perfil_cão.html">
+                        <img src="images/dog.png" alt="Dog Image" />
+                    </a>
+                    <h2>Paty</h2>
+                </div>
+                <div class="dog-profile">
+                    <a href="perfil_cão.html">
+                        <img src="images/dog.png" alt="Dog Image" />
+                    </a>
+                    <h2>Sylvester</h2>
+                </div>
+            </div>
+
+            <div class="dog-profile">
+                <a href="howmany.html">
+                    <img src="images/plus.png" alt="Plus Image" />
+                </a>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="d-flex justify-content-between w-75">
+                <a href="Projeto Mas/suggestion.html">
+                    <img src="images/bowl.png" style="height:50px; width:50px" />
+                </a>
+                <a href="#"><img src="images/med.png" style="height:50px; width:50px" /></a>
+                <a href="perfil_cliente.html"><img src="images/person.png" style="height:50px; width:50px" /></a>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>
+

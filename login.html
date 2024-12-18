@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Login - PawPal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        .error-message { 
+            color: #C62828; 
+            font-size: 0.9em; 
+        }
+
+        .logo {
+            height: 80px; 
+            max-width: 100%; 
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+
+        body {
+            background-color: #173B33;
+            font-family: 'Raleway', sans-serif;
+            color: white;
+        }
+
+        .container {
+            background-color: #E4572E;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        h2 {
+            font-weight: bold;
+            color: white;
+            margin-top: 15px;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .form-footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <img class="logo" src="images/images-removebg-preview.png" alt="PawPal Logo">
+      <h2 class="mb-4">Entrar</h2>
+
+      <form id="login-form">
+          <div class="mb-3">
+              <label for="email" class="form-label" style="display: block;">
+                  <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                      <div class="col-4" style="display: flex; align-items: center; justify-content: center;">
+                          <strong>Email <span class="text-danger">*</span></strong>
+                      </div>
+                      <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                          <input type="email" id="email" class="form-control" placeholder="Insira o seu email" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                      </div>
+                  </div>
+              </label>
+              <div id="email-error" class="error-message"></div>
+          </div>
+
+          <div class="mb-3">
+              <label for="password" class="form-label" style="display: block;">
+                  <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                      <div class="col-4" style="display: flex; align-items: center; justify-content: center;">
+                          <strong>Password <span class="text-danger">*</span></strong>
+                      </div>
+                      <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                          <input type="password" id="password" class="form-control" placeholder="Insira sua senha" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                      </div>
+                  </div>
+              </label>
+              <div id="password-error" class="error-message"></div>
+          </div>
+
+          <div class="form-footer">
+              <p>Don't have an account? <a href="create.html" class="create-account-link">Create one here</a></p>
+          </div>
+
+          <div style="display: flex; justify-content: center; margin-top: 30px;">
+              <button type="button" class="btn btn-light" id="login-button" style="height: 50px;"><strong>Entrar</strong></button>
+          </div>
+      </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script>
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        $("#login-button").on("click", function () {
+            let valid = true;
+            $(".error-message").text("");
+
+            const email = $("#email").val().trim();
+            const password = $("#password").val().trim();
+
+            if (!validateEmail(email)) {
+                valid = false;
+                $("#email-error").text("Insira um email válido.");
+            }
+
+            if (!password) {
+                valid = false;
+                $("#password-error").text("A senha é obrigatória.");
+            }
+
+            if (valid) {
+                const userData = JSON.parse(localStorage.getItem(email));
+                console.log(userData);
+                if (!userData) {
+                    valid = false;
+                    $("#email-error").text("Este email não está registrado.");
+                } else if (userData.password !== password) {
+                    valid = false;
+                    $("#password-error").text("Senha incorreta.");
+                } else {
+                    console.log("Usuário logado com sucesso:", userData);
+                    window.location.replace("file:///C:/Users/João%20Farias/Desktop/lei/itw/trabalhomas/howmany.html");
+                }
+            }
+        });
+    </script>
+  </body>
+</html>

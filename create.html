@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>PawPal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="login.css" rel="stylesheet" />
+    <style>
+        .error-message {
+            color: #C62828;
+            font-size: 0.9em;
+        }
+
+        .logo {
+            height: 100px;
+            max-width: 100%;
+            float: right;
+        }
+
+        body {
+            background-color: #173B33;
+            font-family: 'Open Sans', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #E4572E;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        h2 {
+            color: white;
+        }
+
+        button.btn {
+            color: #E4572E;
+            background-color: white;
+            border-radius: 15px;
+            border: none;
+        }
+
+        button.btn:hover {
+            background-color: #f7f7f7;
+        }
+
+        .form-control {
+            background-color: white;
+            color: black;
+        }
+
+        .form-check-label {
+            color: white;
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+        <button type="button" class="btn" onclick="window.location.href='login.html'">
+            <i class="fa fa-arrow-left fa-3x" aria-hidden="true"></i>
+        </button>
+        <img class="logo" src="images/images-removebg-preview.png">
+        <h2 class="mb-4" style="clear: right"><strong>Criar Conta</strong></h2>
+
+        <form id="create-account-form">
+            <div class="mb-3">
+                <label for="name" class="form-label" style="display: block;">
+                    <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                        <div class="col-4" style="display: flex; align-items: center; justify-content: center; color: white">
+                            <strong>Nome <span class="text-danger">*</span></strong>
+                        </div>
+                        <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                            <input type="text" id="name" class="form-control" data-bind="value: name" placeholder="Insira o seu nome" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                        </div>
+                    </div>
+                </label>
+                <div id="name-error" class="error-message"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label" style="display: block;">
+                    <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                        <div class="col-4" style="display: flex; align-items: center; justify-content: center; color: white">
+                            <strong>Email <span class="text-danger">*</span></strong>
+                        </div>
+                        <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                            <input type="email" id="email" class="form-control" data-bind="value: email" placeholder="Insira o seu email" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                        </div>
+                    </div>
+                </label>
+                <div id="email-error" class="error-message"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label" style="display: block;">
+                    <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                        <div class="col-4" style="display: flex; align-items: center; justify-content: center; color: white">
+                            <strong>Telefone <span class="text-danger">*</span></strong>
+                        </div>
+                        <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                            <input type="text" id="phone" class="form-control" data-bind="value: phone" placeholder="Insira o seu telefone" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                        </div>
+                    </div>
+                </label>
+                <div id="phone-error" class="error-message"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="nif" class="form-label" style="display: block;">
+                    <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                        <div class="col-4" style="display: flex; align-items: center; justify-content: center; color: white">
+                            <strong>NIF</strong>
+                        </div>
+                        <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                            <input type="text" id="nif" class="form-control" data-bind="value: nif" placeholder="Insira o seu NIF" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                        </div>
+                    </div>
+                </label>
+                <div id="nif-error" class="error-message"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label" style="display: block;">
+                    <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                        <div class="col-4" style="display: flex; align-items: center; justify-content: center; color: white">
+                            <strong>Morada</strong>
+                        </div>
+                        <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                            <input type="text" id="address" class="form-control" data-bind="value: address" placeholder="Insira a sua morada" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Password Inputs -->
+            <div class="mb-3">
+                <label for="password" class="form-label" style="display: block;">
+                    <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                        <div class="col-4" style="display: flex; align-items: center; justify-content: center; color: white">
+                            <strong>Senha <span class="text-danger">*</span></strong>
+                        </div>
+                        <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                            <input type="password" id="password" class="form-control" data-bind="value: password" placeholder="Crie sua senha" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                        </div>
+                    </div>
+                </label>
+                <div id="password-error" class="error-message"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label" style="display: block;">
+                    <div class="row" style="border-radius: 15px; border: 1px solid black; padding: 0px;">
+                        <div class="col-4" style="display: flex; align-items: center; justify-content: center; color: white">
+                            <strong>Confirmar Senha <span class="text-danger">*</span></strong>
+                        </div>
+                        <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
+                            <input type="password" id="confirmPassword" class="form-control" data-bind="value: confirmPassword" placeholder="Repita sua senha" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                        </div>
+                    </div>
+                </label>
+                <div id="confirm-password-error" class="error-message"></div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" name="InvalidCheck" type="checkbox" value="" id="invalidCheck" required />
+                    <label class="form-check-label" for="invalidCheck">
+                        Concordo com os Termos e Condições.<span class="text-danger">*</span>
+                    </label>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; margin-top: 70px">
+                <button type="button" class="btn btn-light" id="submit-button" style="height: 50px"><strong>Criar Conta</strong></button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Ensure CryptoJS is included first -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1-crypto-js.js"></script>
+    
+    <!-- Then include the other scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+    <script>
+        function ViewModel() {
+            const self = this;
+            self.name = ko.observable("");
+            self.email = ko.observable("");
+            self.phone = ko.observable("");
+            self.nif = ko.observable("");
+            self.address = ko.observable("");
+            self.password = ko.observable("");
+            self.confirmPassword = ko.observable("");
+        }
+
+        const viewModel = new ViewModel();
+        ko.applyBindings(viewModel);
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            return /^9[1236]\d{7}$/.test(phone);
+        }
+
+        function validateNIF(nif) {
+            return /^(\d{9})$/.test(nif);
+        }
+
+        $("#submit-button").on("click", function () {
+            let valid = true;
+            $(".error-message").text("");
+
+            if (!viewModel.name().trim()) {
+                valid = false;
+                $("#name-error").text("O nome é obrigatório.");
+            }
+
+            if (!validateEmail(viewModel.email())) {
+                valid = false;
+                $("#email-error").text("Insira um email válido.");
+            }
+
+            if (!validatePhone(viewModel.phone())) {
+                valid = false;
+                $("#phone-error").text("Insira um número de telefone válido.");
+            }
+
+            if (viewModel.nif() && !validateNIF(viewModel.nif())) {
+                valid = false;
+                $("#nif-error").text("Insira um NIF válido.");
+            }
+
+            if (!viewModel.password().trim()) {
+                valid = false;
+                $("#password-error").text("A senha é obrigatória.");
+            } else if (viewModel.password() !== viewModel.confirmPassword()) {
+                valid = false;
+                $("#confirm-password-error").text("As senhas não coincidem.");
+            }
+
+
+            // Check if the email or phone already exists in localStorage
+            if (localStorage.getItem(viewModel.email())) {
+                valid = false;
+                $("#email-error").text("Este email já está registrado.");
+            }
+
+            if (localStorage.getItem(viewModel.phone())) {
+                valid = false;
+                $("#phone-error").text("Este número de telefone já está registrado.");
+            }
+
+            if (!$('#invalidCheck').is(':checked')) {
+                valid = false;
+                alert("Você deve concordar com os Termos e Condições.");
+            }
+
+            if (valid) {
+                const userData = {
+                    name: viewModel.name(),
+                    email: viewModel.email(),
+                    phone: viewModel.phone(),
+                    nif: viewModel.nif(),
+                    address: viewModel.address(),
+                    password: viewModel.password() // Store password (normally should be encrypted)
+                };
+
+                // Store the encrypted data
+                localStorage.setItem(viewModel.email(), JSON.stringify(userData));
+                alert("Conta criada com sucesso! Verifique o seu email para ativar a conta.");
+
+                // Reset the form
+                $("#create-account-form")[0].reset();
+                window.location.replace("http://127.0.0.1:5501/login.html");
+            }
+        });
+    </script>
+  </body>
