@@ -242,7 +242,8 @@
                 </div>
                 <div class="description">Waistline is disappearing, difficult to feel ribs. <br />Broad back</div>
                 <button class="next-button">Next</button>
-            </div></form>
+            </div>
+        </form>
     </div>
     </div>
     <!-- Bootstrap JS -->
@@ -276,43 +277,70 @@
                     radioGroup.append(line);
                 }
             }
+
+            // Get the current user email from localStorage
+            const currentUser = JSON.parse(localStorage.getItem("currentuser"));
+            if (!currentUser || !currentUser.email) {
+                alert("No current user found. Please log in.");
+                window.location.href = "login.html"; // Redirect to login if no user is found
+                return;
+            }
+
+            const email = currentUser.email;
+
+            // Retrieve the user data from localStorage
+            let userData = JSON.parse(localStorage.getItem(email));
+            if (!userData || !userData.dogs) {
+                alert("User data or dogs data not found. Please log in.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            // Get the dog ID from the URL
             const urlParams = new URLSearchParams(window.location.search);
-            const dogId = urlParams.get('dogId');
-            let dogData = JSON.parse(localStorage.getItem(`dog-${dogId}`));
-            $(".app-title").text(dogData.name)
-            $("#gender").text(dogData.gender)
-            $(document).ready(function () {
-                const urlParams = new URLSearchParams(window.location.search);
-                const dogId = urlParams.get('dogId');
-                let dogData = JSON.parse(localStorage.getItem(`dog-${dogId}`)) || {};
+            const dogId = parseInt(urlParams.get('dogId'));
 
-                $('#questionnaireForm').submit(function (event) {
-                    event.preventDefault();
+            // Find the dog by its ID
+            let dogData = userData.dogs.find(dog => dog.id === dogId);
+            if (!dogData) {
+                alert("Dog data not found. Please go back and try again.");
+                window.location.href = "home.html"; // Redirect to home if the dog isn't found
+                return;
+            }
 
-                    const activity = $('input[name="activityLevel"]:checked').val(); // Get selected activity level
+            // Populate the page with dog data
+            $(".app-title").text(dogData.name);
+            $("#gender").text(dogData.gender);
 
-                    if (!activity) {
-                        alert("Please select a body type before proceeding.");
-                        return; // Exit the function if no radio button is selected
-                    }
+            // Handle form submission
+            $('#questionnaireForm').submit(function (event) {
+                event.preventDefault();
 
-                    const updatedDogData = {
-                        ...dogData,
-                        weight: activity, // Save selected body type
-                    };
+                const activity = $('input[name="activityLevel"]:checked').val(); // Get selected activity level
 
-                    // Save updated data in localStorage
-                    localStorage.setItem(`dog-${dogId}`, JSON.stringify(updatedDogData));
+                if (!activity) {
+                    alert("Please select a body type before proceeding.");
+                    return; // Exit the function if no radio button is selected
+                }
 
-                    // Redirect to activity.html for the same dog
-                    window.location.href = `activity.html?dogId=${dogId}`;
-                });
+                // Update the dog's data
+                const updatedDogData = {
+                    ...dogData,
+                    weight: activity, // Save selected body type
+                };
+
+                // Update the dog in the user's dogs array
+                const dogIndex = userData.dogs.findIndex(dog => dog.id === dogId);
+                userData.dogs[dogIndex] = updatedDogData;
+
+                // Save the updated user data back to localStorage
+                localStorage.setItem(email, JSON.stringify(userData));
+
+                // Redirect to activity.html for the same dog
+                window.location.href = `activity.html?dogId=${dogId}`;
             });
-
-
-
-            $(window).resize(drawLine);
         });
     </script>
+
 </body>
 </html>

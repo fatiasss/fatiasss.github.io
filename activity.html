@@ -187,7 +187,7 @@
         <div class="label-card">
             <h2>Her activity level is</h2>
             <form id="questionnaireForm">
-                <img src="images/image_2024-11-28_204255297_upscaled.png" class="img-fluid my-3" alt="Dog Image" style="width:204px; height:150px"  />
+                <img src="images/image_2024-11-28_204255297_upscaled.png" class="img-fluid my-3" alt="Dog Image" style="width:204px; height:150px" />
                 <div class="radio-group" id="activity">
                     <label>
                         <input type="radio" name="activityLevel" value="Not Active">
@@ -247,11 +247,40 @@
                 }
             }
 
+            // Get the current user's email from localStorage
+            const currentUser = JSON.parse(localStorage.getItem("currentuser"));
+            if (!currentUser || !currentUser.email) {
+                alert("No current user found. Please log in.");
+                window.location.href = "login.html"; // Redirect to login if no user is found
+                return;
+            }
+
+            const email = currentUser.email;
+
+            // Retrieve the user data from localStorage
+            let userData = JSON.parse(localStorage.getItem(email));
+            if (!userData || !userData.dogs) {
+                alert("User data or dogs data not found. Please log in.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            // Get the dog ID from the URL
             const urlParams = new URLSearchParams(window.location.search);
-            const dogId = urlParams.get('dogId');
-            let dogData = JSON.parse(localStorage.getItem(`dog-${dogId}`));
+            const dogId = parseInt(urlParams.get('dogId'));
+
+            // Find the dog by its ID
+            let dogData = userData.dogs.find(dog => dog.id === dogId);
+            if (!dogData) {
+                alert("Dog data not found. Please go back and try again.");
+                window.location.href = "home.html"; // Redirect to home if the dog isn't found
+                return;
+            }
+
+            // Populate the page with dog data
             $(".app-title").text(dogData.name);
 
+            // Handle form submission
             $('#questionnaireForm').submit(function (event) {
                 event.preventDefault();
 
@@ -262,20 +291,26 @@
                     return; // Stop the form submission
                 }
 
+                // Update the dog's data
                 const updatedDogData = {
                     ...dogData,
                     activitylevel: activity, // Save selected activity level
                 };
 
-                // Save updated data in localStorage
-                localStorage.setItem(`dog-${dogId}`, JSON.stringify(updatedDogData));
+                // Update the dog in the user's dogs array
+                const dogIndex = userData.dogs.findIndex(dog => dog.id === dogId);
+                userData.dogs[dogIndex] = updatedDogData;
 
-                // Redirect to activity.html for the same dog
+                // Save the updated user data back to localStorage
+                localStorage.setItem(email, JSON.stringify(userData));
+
+                // Redirect to picky.html for the same dog
                 window.location.href = `picky.html?dogId=${dogId}`;
             });
 
             $(window).resize(drawLine);
         });
     </script>
+
 </body>
 </html>

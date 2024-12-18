@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\weight.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:weight.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\howmany.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:howmany.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\weight.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:weight.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\create.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:create.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\picky.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -21,14 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\activity.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:activity.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|c:\\users\\jo\u00E3o farias\\desktop\\lei\\itw\\fatiasss.github.io\\create.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6D837979-FDC6-4374-A5A0-FF8E7DA147D8}|trabalhomas.csproj|solutionrelative:create.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,36 +38,35 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "weight.html",
               "DocumentMoniker": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\weight.html",
               "RelativeDocumentMoniker": "weight.html",
               "ToolTip": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\weight.html",
               "RelativeToolTip": "weight.html",
-              "ViewState": "AgIAAAsBAAAAAAAAAAAAACwBAABEAAAAAAAAAA==",
+              "ViewState": "AgIAABQBAAAAAAAAAAAAACYBAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-12-18T15:39:15.408Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-18T15:39:15.408Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "picky.html",
               "DocumentMoniker": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\picky.html",
               "RelativeDocumentMoniker": "picky.html",
               "ToolTip": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\picky.html",
               "RelativeToolTip": "picky.html",
-              "ViewState": "AgIAAOoAAAAAAAAAAAAAAAwBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAPwAAAAAAAAAAAAAABYBAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2024-12-18T15:35:31.606Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "diet.html",
               "DocumentMoniker": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\diet.html",
               "RelativeDocumentMoniker": "diet.html",
@@ -79,7 +78,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "activity.html",
               "DocumentMoniker": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\activity.html",
               "RelativeDocumentMoniker": "activity.html",
@@ -97,25 +96,27 @@
               "RelativeDocumentMoniker": "howmany.html",
               "ToolTip": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\howmany.html",
               "RelativeToolTip": "howmany.html",
-              "ViewState": "AgIAAJcAAAAAAAAAAAAiwNEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAASwKIAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-12-18T15:08:44.449Z"
+              "WhenOpened": "2024-12-18T15:08:44.449Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\index.html",
               "RelativeDocumentMoniker": "index.html",
               "ToolTip": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\index.html",
               "RelativeToolTip": "index.html",
-              "ViewState": "AgIAAHIAAAAAAAAAAAASwIsAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAAAHEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-12-18T14:19:20.216Z"
+              "WhenOpened": "2024-12-18T14:19:20.216Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "create.html",
               "DocumentMoniker": "C:\\Users\\Jo\u00E3o Farias\\Desktop\\lei\\itw\\fatiasss.github.io\\create.html",
               "RelativeDocumentMoniker": "create.html",

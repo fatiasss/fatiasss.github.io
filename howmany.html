@@ -132,7 +132,7 @@
             <h1 class="app-title">Register Your Dogs</h1>
         </div>
         <div class="container align-content-center">
-            <img src="images/dogs.png"/>
+            <img src="images/dogs.png" />
         </div>
         <form id="dogForm" class="text-center mt-4">
             <div class="label-card">
@@ -163,66 +163,73 @@
         </form>
     </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    localStorage.clear();
-    function updateDogNameInputs() {
-        const dogNamesContainer = document.getElementById('dogNamesContainer');
-        dogNamesContainer.innerHTML = '';
-        const count = Math.max(1, parseInt(document.getElementById('dogCount').value) || 1);
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function updateDogNameInputs() {
+            const dogNamesContainer = document.getElementById('dogNamesContainer');
+            dogNamesContainer.innerHTML = '';
+            const count = Math.max(1, parseInt(document.getElementById('dogCount').value) || 1);
 
-        for (let i = 0; i < count; i++) {
-            const newInput = document.createElement('input');
-            newInput.type = 'text';
-            newInput.className = 'dog-name mb-2';
-            newInput.placeholder = "Enter dog's name";
-            newInput.required = true;
-            dogNamesContainer.appendChild(newInput);
-        }
-    }
-    function getTotalDogs() {
-        let totalDogs = 0;
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key.startsWith('dog-') && !isNaN(key.split('-')[1])) {
-                totalDogs++;
+            for (let i = 0; i < count; i++) {
+                const newInput = document.createElement('input');
+                newInput.type = 'text';
+                newInput.className = 'dog-name mb-2';
+                newInput.placeholder = "Enter dog's name";
+                newInput.required = true;
+                dogNamesContainer.appendChild(newInput);
             }
         }
-        return totalDogs;
-    }
 
-
-    document.getElementById('dogCount').addEventListener('input', updateDogNameInputs);
-    document.addEventListener('DOMContentLoaded', updateDogNameInputs);
-
-    document.getElementById('dogForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const dogNames = Array.from(document.querySelectorAll('.dog-name')).map(input => input.value.trim());
-        const uniqueNames = new Set(dogNames);
-        const errorMessage = document.getElementById('errorMessage');
-
-        if (dogNames.length !== uniqueNames.size) {
-            errorMessage.textContent = 'Error: Dog names must be unique.';
-        } else {
-            errorMessage.textContent = '';
-            const dogs = [];
-            dogNames.forEach((name, index) => {
-                dogs.push({
-                    id: index + 1,
-                    name: name,
-                });
-                localStorage.setItem(`dog-${index + 1}`, JSON.stringify({ id: index + 1, name: name }));
-            });
-            
-            var total = getTotalDogs();
-            localStorage.setItem("temp", total);
-            console.log(localStorage.getItem("temp"));
-            // Redirect to the first dog's questionnaire
-            window.location.href = `dogname.html?dogId=1`;
+        function getCurrentUserEmail() {
+            const currentUser = JSON.parse(localStorage.getItem("currentuser"));
+            return currentUser ? currentUser.email : null;
         }
-    });
-</script>
+
+        document.getElementById('dogCount').addEventListener('input', updateDogNameInputs);
+        document.addEventListener('DOMContentLoaded', updateDogNameInputs);
+
+        document.getElementById('dogForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const dogNames = Array.from(document.querySelectorAll('.dog-name')).map(input => input.value.trim());
+            const uniqueNames = new Set(dogNames);
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (dogNames.length !== uniqueNames.size) {
+                errorMessage.textContent = 'Error: Dog names must be unique.';
+            } else {
+                errorMessage.textContent = '';
+
+                // Retrieve current user's email
+                const email = getCurrentUserEmail();
+                if (!email) {
+                    alert("No current user found. Please log in.");
+                    return;
+                }
+
+                // Retrieve or create the user-specific object
+                let userData = JSON.parse(localStorage.getItem(email)) || {};
+                userData.dogs = userData.dogs || [];
+
+                // Add dogs to the user-specific object
+                dogNames.forEach((name, index) => {
+                    userData.dogs.push({
+                        id: userData.dogs.length + 1, // Increment ID based on existing dogs
+                        name: name,
+                    });
+                });
+
+                // Save the updated user data back to localStorage
+                localStorage.setItem(email, JSON.stringify(userData));
+
+                // Log for debugging
+                console.log(`Updated user data for ${email}:`, userData);
+
+                // Redirect to the first dog's questionnaire
+                window.location.href = `dogname.html?dogId=1`;
+            }
+        });
+    </script>
 </body>
 </html>
