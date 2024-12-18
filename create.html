@@ -168,7 +168,7 @@
                             <strong>Confirmar Senha <span class="text-danger">*</span></strong>
                         </div>
                         <div class="col-8" style="border-left: solid 1px black; padding: 0px;">
-                            <input type="password" id="confirmPassword" class="form-control" data-bind="value: confirmPassword" placeholder="Repita sua senha" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                            <input type="password" id="confirmPassword" class="form-control" data-bind="value: confirmPassword" placeholder="Repita sua senha" style="border: none; border-top-right-radius: 15px; border-bottom-right-radius: 15px; height: 100%;">
                         </div>
                     </div>
                 </label>
@@ -278,6 +278,7 @@
 
             if (valid) {
                 const userData = {
+                    firstTime: true,
                     name: viewModel.name(),
                     email: viewModel.email(),
                     phone: viewModel.phone(),
@@ -292,7 +293,7 @@
 
                 // Reset the form
                 $("#create-account-form")[0].reset();
-                window.location.replace("http://127.0.0.1:5501/login.html");
+                window.location.href="index.html";
             }
         });
     </script>

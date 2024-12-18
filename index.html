@@ -141,7 +141,15 @@
                     $("#password-error").text("Senha incorreta.");
                 } else {
                     console.log("Usuário logado com sucesso:", userData);
-                    window.location.replace("howmany.html");
+                    if (userData.firstTime === true) {
+                        userData.firstTime = false;
+                        console.log(userData);
+                        localStorage.setItem(userData.email, JSON.stringify(userData));
+                        console.log(JSON.parse(localStorage.getItem(email)));
+                    } else {
+                        window.location.replace("home.html");
+                    }
+                        
                 }
             }
         });
