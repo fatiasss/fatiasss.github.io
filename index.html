@@ -141,7 +141,7 @@
                     $("#password-error").text("Senha incorreta.");
                 } else {
                     console.log("Usuário logado com sucesso:", userData);
-                    alert("Inicio de sessão com sucesso! Bem vindo, " + userData.name);
+                    alert("Inicio de sessão com sucesso! Bem vindo, " + userData.name + "!");
                     localStorage.setItem("currentuser", JSON.stringify({ email })); // add an email object to identify the current user
                     if (userData.firstTime === true) {
                         window.location.replace("howmany.html");
