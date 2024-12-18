@@ -142,10 +142,7 @@
                 } else {
                     console.log("Usuário logado com sucesso:", userData);
                     if (userData.firstTime === true) {
-                        userData.firstTime = false;
-                        console.log(userData);
-                        localStorage.setItem(userData.email, JSON.stringify(userData));
-                        console.log(JSON.parse(localStorage.getItem(email)));
+                        window.location.replace("howmany.html");
                     } else {
                         window.location.replace("home.html");
                     }
