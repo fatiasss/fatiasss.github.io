@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
@@ -11,10 +10,9 @@
             font-family: 'Raleway', sans-serif;
         }
 
-        
         .container {
             width: 320px;
-            height: auto; 
+            height: auto;
             background: white;
             border-radius: 10px;
             position: relative;
@@ -22,7 +20,6 @@
             padding: 20px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-
 
         .header {
             background-color: #173B33;
@@ -55,7 +52,6 @@
             background-color: #FF775E;
             color: white;
             border: none;
-           
             font-size: 16px;
             border-radius: 5px;
             text-transform: uppercase;
@@ -72,7 +68,6 @@
                 transform: scale(1);
             }
     </style>
-    
 </head>
 <body>
     <div class="container">
@@ -85,32 +80,26 @@
         <div class="div">
             <div class="overlap-group">
                 <div class="rectangle"></div>
-                
-                <p class="text-wrapper" style="font-family: Raleway; text-align: left; font-size: 30px; font-weight: 900; color: #35605C; "> Recommended Plan (AAFCO and WSAVA compliant)</p> <!-- I gotta change this -->
+                <p class="text-wrapper" style="font-family: Raleway; text-align: left; font-size: 30px; font-weight: 900; color: #35605C;">Recommended Plan (AAFCO and WSAVA compliant)</p>
                 <div class="rectangle"></div>
                 <div class="frame"></div>
-                
-              
             </div>
             <div class="overlap">
-                <div class="text-wrapper-2"style="font-family: Raleway; font-size: 20px; font-style: normal; font-weight: 700;text-align:center">Turkey, Beef, and Chicken</div>
-                <p class="first-box-day" style=" font-family: Raleway; font-size: 16px; font-style: normal; font-weight: 700;text-align:center">
+                <div class="text-wrapper-2" style="font-family: Raleway; font-size: 20px; font-style: normal; font-weight: 700; text-align:center">Turkey, Beef, and Chicken</div>
+                <p class="first-box-day" style="font-family: Raleway; font-size: 16px; font-style: normal; font-weight: 700; text-align:center">
                     <span class="span">First Box:</span>
-                    <span class="text-wrapper-3"> $4.12/day </span>
+                    <span class="text-wrapper-3">$4.12/day</span>
                     <span class="span">(50% OFF)<br /></span>
                 </p>
             </div>
             <img class="image" src="https://c.animaapp.com/wq2NmTw7/img/image-3@2x.png" />
 
-            <!-- Fix this for two rows one in each do later -->
+           
             <div class="next-button text-center mb-3">
-                <a href="./ordersummary.html" class="btn btn-orange btn-lg">
+                <a href="./ordersummary.html" class="btn btn-orange btn-lg" onclick="savePlan()">
                     Continue with this plan
                 </a>
             </div>
-
-
-
 
             <div class="next-button text-center">
                 <a href="./chooseorder.html" class="btn-text-link" style="color: #FF775E">
@@ -120,7 +109,25 @@
         </div>
     </div>
 
+    <script>
+        
+            function savePlan() {
+            const selectedRecipes = [
+            {
+                name: "Chicken",
+            price: 14.19, 
+                },
+            ];
+
+            
+            localStorage.setItem("selectedRecipes", JSON.stringify(selectedRecipes));
+
+            console.log("Selected recipes saved:", selectedRecipes);
+        }
    
+
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
