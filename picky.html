@@ -262,6 +262,11 @@
 
                     const picky = $('input[name="activityLevel"]:checked').val(); // Get selected picky
 
+                    if (!picky) {
+                        alert("Please select a pickiness level before proceeding.");
+                        return; // Exit the function if no radio button is selected
+                    }
+
                     const updatedDogData = {
                         ...dogData,
                         pickiness: picky, // Save selected body type
