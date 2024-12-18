@@ -167,6 +167,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    localStorage.clear();
     function updateDogNameInputs() {
         const dogNamesContainer = document.getElementById('dogNamesContainer');
         dogNamesContainer.innerHTML = '';
@@ -181,6 +182,18 @@
             dogNamesContainer.appendChild(newInput);
         }
     }
+    function getTotalDogs() {
+        let totalDogs = 0;
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key.startsWith('dog-') && !isNaN(key.split('-')[1])) {
+                totalDogs++;
+            }
+        }
+        return totalDogs;
+    }
+
+
     document.getElementById('dogCount').addEventListener('input', updateDogNameInputs);
     document.addEventListener('DOMContentLoaded', updateDogNameInputs);
 
@@ -198,11 +211,14 @@
             dogNames.forEach((name, index) => {
                 dogs.push({
                     id: index + 1,
-                    name: name
+                    name: name,
                 });
                 localStorage.setItem(`dog-${index + 1}`, JSON.stringify({ id: index + 1, name: name }));
             });
-
+            
+            var total = getTotalDogs();
+            localStorage.setItem("temp", total);
+            console.log(localStorage.getItem("temp"));
             // Redirect to the first dog's questionnaire
             window.location.href = `dogname.html?dogId=1`;
         }
