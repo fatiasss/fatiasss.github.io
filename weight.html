@@ -291,6 +291,11 @@
 
                     const activity = $('input[name="activityLevel"]:checked').val(); // Get selected activity level
 
+                    if (!activity) {
+                        alert("Please select an body type before proceeding.");
+                        return; // Exit the function if no radio button is selected
+                    }
+
                     const updatedDogData = {
                         ...dogData,
                         weight: activity, // Save selected body type

@@ -250,32 +250,29 @@
             const urlParams = new URLSearchParams(window.location.search);
             const dogId = urlParams.get('dogId');
             let dogData = JSON.parse(localStorage.getItem(`dog-${dogId}`));
-            $(".app-title").text(dogData.name)
+            $(".app-title").text(dogData.name);
 
-            $(document).ready(function () {
-                const urlParams = new URLSearchParams(window.location.search);
-                const dogId = urlParams.get('dogId');
-                let dogData = JSON.parse(localStorage.getItem(`dog-${dogId}`)) || {};
+            $('#questionnaireForm').submit(function (event) {
+                event.preventDefault();
 
-                $('#questionnaireForm').submit(function (event) {
-                    event.preventDefault();
+                // Check if any radio button is selected
+                const activity = $('input[name="activityLevel"]:checked').val();
+                if (!activity) {
+                    alert("Please select an activity level before proceeding.");
+                    return; // Stop the form submission
+                }
 
-                    const activity = $('input[name="activityLevel"]:checked').val(); // Get selected activity level
+                const updatedDogData = {
+                    ...dogData,
+                    activitylevel: activity, // Save selected activity level
+                };
 
-                    const updatedDogData = {
-                        ...dogData,
-                        activitylevel: activity, // Save selected body type
-                    };
+                // Save updated data in localStorage
+                localStorage.setItem(`dog-${dogId}`, JSON.stringify(updatedDogData));
 
-                    // Save updated data in localStorage
-                    localStorage.setItem(`dog-${dogId}`, JSON.stringify(updatedDogData));
-
-                    // Redirect to activity.html for the same dog
-                    window.location.href = `picky.html?dogId=${dogId}`;
-                });
+                // Redirect to activity.html for the same dog
+                window.location.href = `picky.html?dogId=${dogId}`;
             });
-
-
 
             $(window).resize(drawLine);
         });
