@@ -129,7 +129,8 @@
     <script>
         // Função para carregar os dados do usuário
         function loadUserData() {
-            const email = localStorage.getItem("currentuser");
+            const email = JSON.parse(localStorage.getItem("currentuser")).email;
+            console.log(email);
             const userData = JSON.parse(localStorage.getItem(email));
 
             if (userData) {
@@ -146,7 +147,7 @@
 
         // Função para salvar os dados do usuário
         function saveUserData() {
-            const email = localStorage.getItem("currentuser");
+            const email = (localStorage.getItem("currentuser")).email;
             const userData = JSON.parse(localStorage.getItem(email));
 
             if (userData) {

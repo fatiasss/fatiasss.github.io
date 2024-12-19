@@ -127,13 +127,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script>
-        var userEmail = localStorage.getItem("currentuser");
-        
+        var userEmail = JSON.parse(localStorage.getItem("currentuser"));
+        console.log(userEmail);
         var vm = function () {
             this.dogs = ko.observableArray();
 
             // Retrieve user data from localStorage
-            var userData = JSON.parse(localStorage.getItem(userEmail));
+            var userData = JSON.parse(localStorage.getItem(userEmail.email));
+            console.log(userData);
             
             // Check if userData and dogs array exist, then populate the observableArray
             if (userData && userData.dogs) {

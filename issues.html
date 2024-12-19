@@ -189,7 +189,7 @@
 
                 // Save the updated user data back to localStorage
                 localStorage.setItem(email, JSON.stringify(userData));
-
+                
                 // Check conditions and navigate
                 if (updatedDogData.healthissues === 'has') {
                     window.location.href = `illness.html?dogId=${dogId}`;

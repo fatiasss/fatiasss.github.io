@@ -200,6 +200,7 @@
 
             // Retrieve the user data from localStorage using the current user's email
             let userData = JSON.parse(localStorage.getItem(email));
+            console.log(email, "->", userData);
             if (!userData || !userData.dogs) {
                 alert("User data or dogs data not found. Please log in.");
                 window.location.href = "login.html"; // Redirect to login if no data is found

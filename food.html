@@ -187,7 +187,7 @@
 
                 // Save the updated user data back to localStorage
                 localStorage.setItem(email, JSON.stringify(userData));
-
+                console.log(email, userData);
                 // Redirect to issues.html for the same dog
                 window.location.href = `issues.html?dogId=${dogId}`;
             });
