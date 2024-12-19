@@ -16,7 +16,7 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            color: black
+            color: black;
         }
 
         .section-title {
@@ -25,44 +25,6 @@
 
         .section-value {
             color: white;
-        }
-
-        .arrow {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #ccc;
-        }
-
-        .attribute-section .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            margin-right: 5px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            font-size: 0.9em;
-        }
-
-        #loadButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .error-message {
-            color: #C62828;
-            font-size: 0.9em;
-        }
-
-        .logo {
-            height: 100px;
-            max-width: 100%;
-            float: right;
         }
 
         body {
@@ -81,10 +43,6 @@
             color: black;
         }
 
-        h2 {
-            color: white;
-        }
-
         button.btn {
             color: #E4572E;
             background-color: white;
@@ -92,25 +50,9 @@
             border: none;
         }
 
-        button.btn:hover {
-            background-color: #f7f7f7;
-        }
-
-        .form-control {
-            background-color: white;
-            color: black;
-        }
-
-        .form-check-label {
-            color: white;
-        }
-
-        input::placeholder {
-            color: #999;
-        }
-        #mt-5 {
-            align-content: center
-        }
+            button.btn:hover {
+                background-color: #f7f7f7;
+            }
     </style>
 </head>
 <body>
@@ -121,68 +63,56 @@
                 <div class="section-title">Name</div>
                 <div class="section-value" contenteditable="true" data-bind="text: name"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Gender</div>
                 <div class="section-value" contenteditable="true" data-bind="text: gender"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Has been Spayed?</div>
                 <div class="section-value" contenteditable="true" data-bind="text: spayed"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Age</div>
                 <div class="section-value" contenteditable="true" data-bind="text: ageValue"></div>
                 <span data-bind="text: ageUnit"></span>
             </div>
-
             <div class="section">
                 <div class="section-title">Breed</div>
                 <div class="section-value" contenteditable="true" data-bind="text: breed"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Weight</div>
                 <div class="section-value" contenteditable="true" data-bind="text: weight"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Activity Level</div>
                 <div class="section-value" contenteditable="true" data-bind="text: activitylevel"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Pickiness</div>
                 <div class="section-value" contenteditable="true" data-bind="text: pickiness"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Preferred Food Type</div>
                 <div class="section-value" contenteditable="true" data-bind="text: foodtype"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Health Issues</div>
                 <div class="section-value" contenteditable="true" data-bind="text: healthissues"></div>
             </div>
-
             <div class="section">
                 <div class="section-title">Diet</div>
-                <ul data-bind="foreach: diet">
+                <ul data-bind="foreach: diet, afterRender: addDietListeners">
                     <li contenteditable="true" data-bind="text: $data"></li>
                 </ul>
             </div>
-
             <div class="section">
                 <div class="section-title">Illnesses</div>
-                <ul data-bind="foreach: illnesses">
+                <ul data-bind="foreach: illnesses, afterRender: addIllnessListeners">
                     <li contenteditable="true" data-bind="text: $data"></li>
                 </ul>
             </div>
-
-            <button class="btn" onclick="ko.dataFor(this).saveChanges()">Save Changes</button>
+            <button class="btn" data-bind="click: $parent.saveChanges">Save Changes</button>
             <button id="loadButton"><a href="home.html" style="color: white; text-decoration: none;">Back</a></button>
         </div>
     </div>
@@ -191,57 +121,129 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.min.js"></script>
     <script>
-        var userEmail = localStorage.getItem("currentuser").email;
-
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
 
-        var id = getQueryParam("id");
+        var id = getQueryParam("dog");
+        var currentUser = JSON.parse(localStorage.getItem("currentuser"));
+        var userEmail = currentUser?.email;
 
-        var vm = function () {
-            var self = this;
-            self.dog = ko.observable();
+        if (!userEmail) {
+            console.error("No user email found. Please ensure 'currentuser' exists in localStorage.");
+        } else {
+            console.log("Current User Email:", userEmail);
+        }
 
-            // Retrieve user data from localStorage
-            var userData = JSON.parse(localStorage.getItem(userEmail));
+        document.addEventListener("DOMContentLoaded", function () {
+            const vm = function () {
+                const self = this; // Reference to the ViewModel instance
+                self.dog = ko.observable(null);
 
-            // Check if userData and dogs array exist, then populate the observable
-            if (userData && userData.dogs) {
-                var dogs = userData.dogs;
-                for (var i = 0; i < dogs.length; i++) {
-                    if (dogs[i].id == id) {
-                        self.dog(ko.mapping.fromJS(dogs[i]));
-                        break;
-                    }
+                // Retrieve user data from localStorage
+                const userData = JSON.parse(localStorage.getItem(userEmail));
+                if (!userData || !userData.dogs) {
+                    console.error("No dogs found for the current user.");
+                    return;
                 }
-            }
 
-            // Function to save changes to the localStorage
-            self.saveChanges = function () {
-                if (userData && userData.dogs) {
-                    var updatedDog = ko.toJS(self.dog);
-                    for (var i = 0; i < userData.dogs.length; i++) {
-                        if (userData.dogs[i].id == id) {
-                            userData.dogs[i] = updatedDog;
-                            break;
+                if (!id) {
+                    console.error("Dog ID not found in the URL.");
+                    return;
+                }
+
+                console.log("Dog ID from URL:", id);
+                console.log("User  Data:", userData);
+
+                // Find the specific dog by ID
+                const foundDog = userData.dogs.find(d => d.id == id);
+                if (!foundDog) {
+                    console.error("No dog found with ID:", id);
+                    return;
+                }
+
+                console.log("Found Dog:", foundDog);
+
+                // Map the dog object to an observable
+                self.dog(ko.mapping.fromJS(foundDog, {
+                    'create': function (options) {
+                        // Check if the property is diet or illnesses and make it an observable array
+                        if (options.data.diet) {
+                            options.data.diet = ko.observableArray(options.data.diet.map(item => ko.observable(item)));
+                        }
+                        if (options.data.illnesses) {
+                            options.data.illnesses = ko.observableArray(options.data.illnesses.map(item => ko.observable(item)));
+                        }
+                        return ko.mapping.fromJS(options.data);
+                    }
+                }));
+
+                // Save changes function, bound to self
+                self.saveChanges = function () {
+                    if (userData && userData.dogs) {
+                        const updatedDog = ko.toJS(self.dog);
+                        const index = userData.dogs.findIndex(d => d.id == id);
+
+                        if (index > -1) {
+                            userData.dogs[index] = updatedDog;
+                            localStorage.setItem(userEmail, JSON.stringify(userData));
+                            alert("The dog information has been updated successfully.");
+                        } else {
+                            console.error("Dog index not found in user's dog array.");
                         }
                     }
+                };
 
-                    // Update localStorage
-                    localStorage.setItem(userEmail, JSON.stringify(userData));
+                // Update observables on input change
+                self.updateField = function (field, value) {
+                    self.dog()[field](value);
+                };
 
-                    // Notify the user
-                    alert("The dog information has been updated successfully.");
-                }
+                // Update diet or illness item
+                self.updateListItem = function (listName, index, value) {
+                    const list = self.dog()[listName]();
+                    if (list && list[index]) {
+                        list[index](value); // Update the observable item
+                    }
+                };
+
+                // Add event listeners for diet items
+                self.addDietListeners = function (elements) {
+                    elements.forEach((element, index) => {
+                        element.addEventListener('blur', function () {
+                            const value = this.innerText;
+                            self.updateListItem('diet', index, value); // Update the observable item
+                        });
+                    });
+                };
+
+                // Add event listeners for illness items
+                self.addIllnessListeners = function (elements) {
+                    elements.forEach((element, index) => {
+                        element.addEventListener('blur', function () {
+                            const value = this.innerText;
+                            self.updateListItem('illnesses', index, value); // Update the observable item
+                        });
+                    });
+                };
             };
-        };
 
-        // Apply bindings
-        ko.applyBindings(new vm());
+            // Apply bindings to the ViewModel
+            const viewModel = new vm();
+            ko.applyBindings(viewModel);
+
+            // Add event listeners for contenteditable fields
+            document.querySelectorAll('.section-value').forEach(element => {
+                element.addEventListener('blur', function () {
+                    const field = this.getAttribute('data-bind').match(/text:\s*(\w+)/)[1];
+                    viewModel.updateField(field, this.innerText);
+                });
+            });
+        });
     </script>
+
 </body>
 </html>
