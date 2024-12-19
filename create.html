@@ -227,9 +227,8 @@
 
         $("#submit-button").on("click", function () {
             let valid = true;
-            $(".error-message").text(""); // Limpar as mensagens de erro
+            $(".error-message").text(""); 
 
-            // Verificações para os campos obrigatórios
             if (!viewModel.name().trim()) {
                 valid = false;
                 $("#name-error").text("O nome é obrigatório.");
@@ -247,7 +246,7 @@
 
             if (viewModel.nif() && !validateNIF(viewModel.nif())) {
                 valid = false;
-                $("#nif-error").text("Insira um NIF válido.");
+                $("#nif-error").text("Insira um NIF válido. (Dado é opcional)");
             }
 
             if (!viewModel.password().trim()) {
@@ -258,31 +257,26 @@
                 $("#confirm-password-error").text("As senhas não coincidem.");
             }
 
-            // Verificação para o campo de morada
             if (viewModel.address().trim() && !validateAddress(viewModel.address())) {
                 valid = false;
                 $("#address-error").text("Insira uma morada válida, com o formato correto (ex.: Rua Principal, Nº 123).");
             }
 
-            // Verificação de email duplicado
             if (localStorage.getItem(viewModel.email())) {
                 valid = false;
                 $("#email-error").text("Este email já está registrado.");
             }
 
-            // Verificação de telefone duplicado
             if (localStorage.getItem(viewModel.phone())) {
                 valid = false;
                 $("#phone-error").text("Este número de telefone já está registrado.");
             }
 
-            // Verificação para o checkbox dos Termos e Condições
             if (!$('#invalidCheck').is(':checked')) {
                 valid = false;
                 alert("Você deve concordar com os Termos e Condições.");
             }
 
-            // Se todos os campos estiverem corretos, armazenar os dados
             if (valid) {
                 const userData = {
                     firstTime: true,
@@ -291,14 +285,12 @@
                     phone: viewModel.phone(),
                     nif: viewModel.nif(),
                     address: viewModel.address(),
-                    password: viewModel.password() // Armazenar senha (normalmente deveria ser criptografada)
+                    password: viewModel.password()
                 };
 
-                // Armazenar os dados no localStorage
                 localStorage.setItem(viewModel.email(), JSON.stringify(userData));
                 alert("Conta criada com sucesso!");
 
-                // Resetar o formulário
                 $("#create-account-form")[0].reset();
                 window.location.href="index.html";
             }

@@ -62,20 +62,20 @@
         .total-price {
             font-weight: bold;
             text-align: center;
-            margin: 15px 0; /* Increased margin */
-            font-size: 1.3rem; /* Larger font size */
+            margin: 15px 0; 
+            font-size: 1.3rem; 
         }
 
         .submit-btn {
             background: #F2674B;
             border-radius: 14px;
             color: white;
-            font-size: 1.5rem; /* Larger font size */
+            font-size: 1.5rem; 
             font-weight: 800;
             text-align: center;
-            padding: 15px; /* Increased padding */
+            padding: 15px; 
             width: 100%;
-            margin-top: 25px; /* Increased margin */
+            margin-top: 25px; 
             border: none;
             transition: background 0.3s;
         }
@@ -115,35 +115,51 @@
 
    
     document.getElementById('paymentForm').addEventListener('submit', function (event) {
-        event.preventDefault(); 
-        
-        let errorMessages = "";
+        event.preventDefault();
+
+        clearErrors();
+
+        const fields = [
+            { id: 'cardNumber', regex: /^\d{16}$/, message: "Card number must be exactly 16 digits and contain only numbers." },
+            { id: 'expiryDate', regex: /^(0[1-9]|1[0-2])\/(\d{2})$/, message: "Expiration date must be in MM/YY format and valid.", extraCheck: isFutureDate },
+            { id: 'cvv', regex: /^\d{3}$/, message: "CVV must be exactly 3 digits." }
+        ];
+
         let valid = true;
 
-       
-        const cardNumber = document.getElementById('cardNumber').value;
-        const cvv = document.getElementById('cvv').value;
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            if (!field.regex.test(input.value) || (field.extraCheck && !field.extraCheck(input.value))) {
+                valid = false;
+                showError(input, field.message);
+            }
+        });
 
-       
-        if (!/^\d{16}$/.test(cardNumber)) {
-            valid = false;
-            errorMessages += "Card number must be exactly 16 digits and contain only numbers.<br>";
-        }
-
-        
-        if (!/^\d{3}$/.test(cvv)) {
-            valid = false;
-            errorMessages += "CVV must be exactly 3 digits.<br>";
-        }
-
-        
-        if (!valid) {
-            document.getElementById('errorMessages').innerHTML = errorMessages;
-        } else {
-           
-            window.location.href = "shippingadress.html"; 
-        }
+        if (valid) window.location.href = "shippingadress.html";
     });
+
+    function showError(input, message) {
+        const error = document.createElement('div');
+        error.className = 'error-message';
+        error.style.color = 'red';
+        error.style.fontSize = '0.9rem';
+        error.style.marginTop = '5px';
+        error.textContent = message;
+        input.insertAdjacentElement('afterend', error);
+    }
+
+    function clearErrors() {
+        document.querySelectorAll('.error-message').forEach(error => error.remove());
+    }
+
+    function isFutureDate(expiryDate) {
+        const [month, year] = expiryDate.split('/').map(Number);
+        const expiry = new Date(2000 + year, month - 1);
+        return expiry > new Date();
+    }
+
+
+
 </script>
 
 </body>
