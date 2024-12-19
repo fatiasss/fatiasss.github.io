@@ -37,27 +37,6 @@
             box-sizing: border-box;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: #e4572e;
-            box-shadow: 0 0 5px #e4572e;
-        }
-
-        #saveButton {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #saveButton:hover {
-            background-color: #0056b3;
-        }
-
         .logo {
             height: 100px;
             max-width: 100%;
@@ -91,82 +70,51 @@
             <h2>Perfil do Cliente</h2>
 
             <div class="section">
-                <label class="section-title" for="name">Name</label>
-                <input class="form-control" id="name" type="text">
+                <label class="section-title">Name</label>
+                <div class="form-control" id="name"></div>
             </div>
 
             <div class="section">
-                <label class="section-title" for="email">Email</label>
-                <input class="form-control" id="email" type="email" readonly>
+                <label class="section-title">Email</label>
+                <div class="form-control" id="email"></div>
             </div>
 
             <div class="section">
-                <label class="section-title" for="phone">Telefone</label>
-                <input class="form-control" id="phone" type="text">
+                <label class="section-title">Telefone</label>
+                <div class="form-control" id="phone"></div>
             </div>
 
             <div class="section">
-                <label class="section-title" for="nif">NIF</label>
-                <input class="form-control" id="nif" type="text">
+                <label class="section-title">NIF</label>
+                <div class="form-control" id="nif"></div>
             </div>
 
             <div class="section">
-                <label class="section-title" for="address">Morada</label>
-                <input class="form-control" id="address" type="text">
+                <label class="section-title">Morada</label>
+                <div class="form-control" id="address"></div>
             </div>
 
-            <div class="section">
-                <label class="section-title" for="password">Senha</label>
-                <input class="form-control" id="password" type="password">
-            </div>
-
-            <button id="saveButton">Salvar Alterações</button>
+            <a href="home.html"><button id="backButton">Voltar</button></a>
         </div>
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script>
         // Função para carregar os dados do usuário
         function loadUserData() {
             const email = JSON.parse(localStorage.getItem("currentuser")).email;
-            console.log(email);
             const userData = JSON.parse(localStorage.getItem(email));
 
             if (userData) {
-                document.getElementById("name").value = userData.name || '';
-                document.getElementById("email").value = userData.email || '';
-                document.getElementById("phone").value = userData.phone || '';
-                document.getElementById("nif").value = userData.nif || '';
-                document.getElementById("address").value = userData.address || '';
-                document.getElementById("password").value = userData.password || '';
+                document.getElementById("name").textContent = userData.name || '';
+                document.getElementById("email").textContent = userData.email || '';
+                document.getElementById("phone").textContent = userData.phone || '';
+                document.getElementById("nif").textContent = userData.nif || '';
+                document.getElementById("address").textContent = userData.address || '';
             } else {
                 alert("Usuário não encontrado.");
             }
         }
-
-        // Função para salvar os dados do usuário
-        function saveUserData() {
-            const email = (localStorage.getItem("currentuser")).email;
-            const userData = JSON.parse(localStorage.getItem(email));
-
-            if (userData) {
-                userData.name = document.getElementById("name").value;
-                userData.phone = document.getElementById("phone").value;
-                userData.nif = document.getElementById("nif").value;
-                userData.address = document.getElementById("address").value;
-                userData.password = document.getElementById("password").value;
-
-                // Salvar os novos dados no localStorage
-                localStorage.setItem(email, JSON.stringify(userData));
-                alert("Dados atualizados com sucesso!");
-            } else {
-                alert("Erro ao salvar os dados.");
-            }
-        }
-
-        // Eventos
-        document.getElementById("saveButton").addEventListener("click", saveUserData);
 
         // Carregar os dados ao iniciar
         loadUserData();
