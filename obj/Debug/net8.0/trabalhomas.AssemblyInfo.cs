@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("trabalhomas")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78cd594a6292213cccf5092f1d58371d6386a606")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58db2b1edab8a1b875337dece4791db9565537f0")]
 [assembly: System.Reflection.AssemblyProductAttribute("trabalhomas")]
 [assembly: System.Reflection.AssemblyTitleAttribute("trabalhomas")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
